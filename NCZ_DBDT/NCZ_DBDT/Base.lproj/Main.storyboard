@@ -148,7 +148,7 @@
                                     <constraint firstAttribute="height" constant="275" id="4Va-3T-Rq6"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="3lG-4E-lJZ" detailTextLabel="Q5E-wN-MaJ" style="IBUITableViewCellStyleSubtitle" id="svm-Jo-9VN">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="douban" textLabel="3lG-4E-lJZ" detailTextLabel="Q5E-wN-MaJ" style="IBUITableViewCellStyleSubtitle" id="svm-Jo-9VN">
                                         <rect key="frame" x="0.0" y="28" width="328" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="svm-Jo-9VN" id="Npz-Mx-JNz">
@@ -329,15 +329,16 @@
                     <connections>
                         <outlet property="bgImage" destination="FGZ-4S-3ie" id="vb7-qO-XLi"/>
                         <outlet property="bgRotationImage" destination="8zu-3Z-GW3" id="qHd-rp-Vp6"/>
+                        <outlet property="songList" destination="Rfe-iN-1rX" id="IlG-En-B3b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
         </scene>
-        <!--View Controller-->
+        <!--Channel View Controller-->
         <scene sceneID="fk8-ly-hoq">
             <objects>
-                <viewController id="E0O-EU-FkQ" sceneMemberID="viewController">
+                <viewController id="E0O-EU-FkQ" customClass="ChannelViewController" customModule="NCZ_DBDT" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="IzO-JV-1TF"/>
                         <viewControllerLayoutGuide type="bottom" id="dDD-rG-2nm"/>
@@ -357,6 +358,22 @@
                                 <rect key="frame" x="-4" y="57" width="328" height="511"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="channel" id="uUc-B4-OmS">
+                                        <rect key="frame" x="0.0" y="28" width="328" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uUc-B4-OmS" id="ksG-zt-e3z">
+                                            <rect key="frame" x="0.0" y="0.0" width="328" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="E0O-EU-FkQ" id="ypl-9S-G4i"/>
+                                    <outlet property="delegate" destination="E0O-EU-FkQ" id="ZkF-b1-emQ"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <animations/>
@@ -372,6 +389,9 @@
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="channelList" destination="hiJ-Hm-aif" id="FKV-aU-w8e"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g7a-ct-XKR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
