@@ -14,6 +14,7 @@
 		2FF73DB71BFB30770080930E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FF73DB51BFB30770080930E /* LaunchScreen.storyboard */; };
 		2FF73DC21BFB30770080930E /* NCZ_DBDTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF73DC11BFB30770080930E /* NCZ_DBDTTests.swift */; };
 		2FF73DCD1BFB30770080930E /* NCZ_DBDTUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF73DCC1BFB30770080930E /* NCZ_DBDTUITests.swift */; };
+		2FF73DDD1BFB5A320080930E /* NCZImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF73DDC1BFB5A320080930E /* NCZImage.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		2FF73DC81BFB30770080930E /* NCZ_DBDTUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NCZ_DBDTUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FF73DCC1BFB30770080930E /* NCZ_DBDTUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NCZ_DBDTUITests.swift; sourceTree = "<group>"; };
 		2FF73DCE1BFB30770080930E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2FF73DDC1BFB5A320080930E /* NCZImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NCZImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				2FF73DAC1BFB30770080930E /* AppDelegate.swift */,
 				2FF73DAE1BFB30770080930E /* ViewController.swift */,
 				2FF73DB01BFB30770080930E /* Main.storyboard */,
+				2FF73DDC1BFB5A320080930E /* NCZImage.swift */,
 				2FF73DB31BFB30770080930E /* Assets.xcassets */,
 				2FF73DB51BFB30770080930E /* LaunchScreen.storyboard */,
 				2FF73DB81BFB30770080930E /* Info.plist */,
@@ -257,6 +260,7 @@
 			files = (
 				2FF73DAF1BFB30770080930E /* ViewController.swift in Sources */,
 				2FF73DAD1BFB30770080930E /* AppDelegate.swift in Sources */,
+				2FF73DDD1BFB5A320080930E /* NCZImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
