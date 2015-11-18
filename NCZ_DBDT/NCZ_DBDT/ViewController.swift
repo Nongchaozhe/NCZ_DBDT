@@ -27,6 +27,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     //频道选择接收
     var channelListData:[JSON] = []
     
+    //图片缓存的字典
+    var imageCache = Dictionary<String,UIImage>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bgRotationImage.onRotation()
@@ -78,10 +81,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         cell.imageView?.sizeToFit()
         let url = data["picture"].string
         print(url)
-        Alamofire.request(Method.GET, url!).response { (_, _, data, error) -> Void in
-            let img = UIImage(data: data!)
-            cell.imageView?.image = img
-        }
+//        Alamofire.request(Method.GET, url!).response { (_, _, data, error) -> Void in
+//            let img = UIImage(data: data!)
+//            cell.imageView?.image = img
+//        }        
+        onGetCacheImage(url!, imgView: cell.imageView!)
         
         
         return cell
@@ -145,11 +149,27 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     }
     //设置歌曲的封面及背景
     func onSetImage(url:String) {
-        Alamofire.request(.GET, url).response { (_, _, data, error) -> Void in
-            let image = UIImage(data: data!)
-            self.bgImage.image = image
-            self.bgRotationImage.image = image
-            
+//        Alamofire.request(.GET, url).response { (_, _, data, error) -> Void in
+//            let image = UIImage(data: data!)
+//            self.bgImage.image = image
+//            self.bgRotationImage.image = image
+//        }
+        onGetCacheImage(url, imgView: self.bgImage)
+        onGetCacheImage(url, imgView: self.bgRotationImage)
+    }
+    
+    //图片缓存方法
+    func onGetCacheImage(url:String,imgView:UIImageView) {
+        let image:UIImage? = self.imageCache[url]
+        if image == nil {
+            Alamofire.request(.GET, url).response(completionHandler: { (_, _, data, error) -> Void in
+                let img = UIImage(data: data!)
+                imgView.image = img
+                self.imageCache[url] = img
+            })
+        }else {
+            //有缓存，直接拿出来用
+            imgView.image = image
         }
     }
     
