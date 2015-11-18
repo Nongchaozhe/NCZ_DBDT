@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2F2ABE941BFC3C2700EB51F1 /* HttpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2ABE931BFC3C2700EB51F1 /* HttpController.swift */; settings = {ASSET_TAGS = (); }; };
+		2F2ABEBE1BFCC39100EB51F1 /* NCZButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2ABEBD1BFCC39100EB51F1 /* NCZButton.swift */; settings = {ASSET_TAGS = (); }; };
 		2FF73DAD1BFB30770080930E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF73DAC1BFB30770080930E /* AppDelegate.swift */; };
 		2FF73DAF1BFB30770080930E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FF73DAE1BFB30770080930E /* ViewController.swift */; };
 		2FF73DB21BFB30770080930E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2FF73DB01BFB30770080930E /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		2F2ABE931BFC3C2700EB51F1 /* HttpController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpController.swift; sourceTree = "<group>"; };
+		2F2ABEBD1BFCC39100EB51F1 /* NCZButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NCZButton.swift; sourceTree = "<group>"; };
 		2FF73DA91BFB30770080930E /* NCZ_DBDT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NCZ_DBDT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2FF73DAC1BFB30770080930E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2FF73DAE1BFB30770080930E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				2FF73DAE1BFB30770080930E /* ViewController.swift */,
 				2FF73DDE1BFB67430080930E /* ChannelViewController.swift */,
 				2F2ABE931BFC3C2700EB51F1 /* HttpController.swift */,
+				2F2ABEBD1BFCC39100EB51F1 /* NCZButton.swift */,
 				2FF73DB01BFB30770080930E /* Main.storyboard */,
 				2FF73DDC1BFB5A320080930E /* NCZImage.swift */,
 				2FF73DB31BFB30770080930E /* Assets.xcassets */,
@@ -344,6 +347,7 @@
 				2FF73DAD1BFB30770080930E /* AppDelegate.swift in Sources */,
 				2FF73DDF1BFB67430080930E /* ChannelViewController.swift in Sources */,
 				2FF73DDD1BFB5A320080930E /* NCZImage.swift in Sources */,
+				2F2ABEBE1BFCC39100EB51F1 /* NCZButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

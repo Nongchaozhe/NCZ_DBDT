@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 import Alamofire
-
+import MediaPlayer
 
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,HttpProtocol,ChannelProtocol {
     //背景
@@ -29,6 +29,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     //图片缓存的字典
     var imageCache = Dictionary<String,UIImage>()
+    
+    //定义媒体播放器实例
+    var audioPlayer:MPMoviePlayerController = MPMoviePlayerController()
+    
+    //申明计时器
+    var timer:NSTimer?
+    
+    @IBOutlet var playTime: UILabel!
+    @IBOutlet var progressLine: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,6 +155,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let imageUrl = rowData["picture"].string
         //设置封面及背景
         onSetImage(imageUrl!)
+        
+        //播放音乐
+        //获取音乐文件地址
+        let url:String = rowData["url"].string!
+        //播放音乐
+        onSetAudio(url)
     }
     //设置歌曲的封面及背景
     func onSetImage(url:String) {
@@ -170,6 +185,54 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }else {
             //有缓存，直接拿出来用
             imgView.image = image
+        }
+    }
+    
+    //播放音乐的方法
+    func onSetAudio(url:String) {
+        self.audioPlayer.stop()
+        self.audioPlayer.contentURL = NSURL(string: url)
+        self.audioPlayer.play()
+        
+        //先停下计时器
+        timer?.invalidate()
+        //计时器归零
+        playTime.text = "00:00"
+        //启动计时器
+        timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "onUpdate", userInfo: nil, repeats: true)
+        
+    }
+    
+    //计时器更新方法
+    func onUpdate() {
+        //获取当前播放时间
+        let t = audioPlayer.currentPlaybackTime
+        if t>0.0 {
+            let currentTime:Int = Int(t)
+            let sec:Int = currentTime%60
+            let min:Int = Int(currentTime/60)
+            
+            var time:String = ""
+            if min < 10 {
+                time = "0\(min):"
+            }else {
+                time = "\(min):"
+            }
+            
+            if sec < 10 {
+                time += "0\(sec)"
+            } else {
+                time += "\(sec)"
+            }
+            playTime.text = time
+            
+            //歌曲总时间
+            let totalTime:Double = audioPlayer.duration
+            //百分比
+            let pro:CGFloat = CGFloat(t/totalTime)
+            
+            progressLine.frame.size.width = view.frame.size.width*pro
+            
         }
     }
     
