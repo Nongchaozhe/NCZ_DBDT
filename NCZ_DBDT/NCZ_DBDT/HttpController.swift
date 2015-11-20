@@ -8,8 +8,6 @@
 
 import Foundation
 import Alamofire
-//import UIKit
-
 
 class HttpController:NSObject {
     //定义代理
@@ -17,17 +15,9 @@ class HttpController:NSObject {
     
     //接收网址，回调代理方法传回数据
     func onSearch(url:String) {
-//        Alamofire.request(.GET, url).response { (request, response, data, error) -> Void in
-//            self.delegate?.didReceivedResults(data!)
-//        }
-//        Alamofire.request(.GET, url).responseJSON { (response) -> Void in
-//            self.delegate?.didReceivedResults(response.data!)
-//        }
-
         Alamofire.request(.GET, url).responseJSON(options: NSJSONReadingOptions.MutableContainers) { (response) -> Void in
             self.delegate?.didReceivedResults(response.result.value!)
         }
-
     }
 }
 

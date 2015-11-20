@@ -109,7 +109,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         cell.imageView?.image = UIImage(named: "thumb")
         cell.imageView?.sizeToFit()
         let url = data["picture"].string
-        print(url)
+//        print(url)
 //        Alamofire.request(Method.GET, url!).response { (_, _, data, error) -> Void in
 //            let img = UIImage(data: data!)
 //            cell.imageView?.image = img
@@ -118,7 +118,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         
         return cell
-        
+    }
+    //设置cell的显示动画
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 0.1)
+        UIView.animateWithDuration(0.25) { () -> Void in
+            cell.layer.transform = CATransform3DMakeScale(1, 1, 1)
+        }
     }
 
     //HttpProtocol需要实现的方法
@@ -131,7 +137,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         }else if let song = json["song"].array {
             isAutoFinish = false
             self.songListData = song
-            print(song)
+//            print(song)
 
             self.songList.reloadData()
             
@@ -276,20 +282,22 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func onBack(btn:UIButton) {
         isAutoFinish = false
-        currentIndex--
-        if currentIndex < 0 {
-            currentIndex = self.songListData.count - 1
-        }
-        onSelectRow(currentIndex)
+//        currentIndex--
+//        if currentIndex < 0 {
+//            currentIndex = self.songListData.count - 1
+//        }
+//        onSelectRow(currentIndex)
+        playOrder()
     }
     
     func onNext(btn:UIButton) {
         isAutoFinish = false
-        currentIndex++
-        if currentIndex > self.songListData.count-1 {
-            currentIndex  = 0
-        }
-        onSelectRow(currentIndex)
+//        currentIndex++
+//        if currentIndex > self.songListData.count-1 {
+//            currentIndex  = 0
+//        }
+//        onSelectRow(currentIndex)
+        playOrder()
     }
     
     func onOrder(btn:OrderButton) {
@@ -314,27 +322,30 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     //歌曲播放结束执行方法
     func playFinish() {
         if isAutoFinish {
-            switch(btnOrder.order) {
-            case 1:
-                //顺序播放
-                currentIndex++
-                if currentIndex > self.songListData.count-1 {
-                    currentIndex  = 0
-                }
-                onSelectRow(currentIndex)
-            case 2:
-                //随机播放
-                currentIndex = random() % songListData.count
-                onSelectRow(currentIndex)
-            case 3:
-                //单曲循环
-                onSelectRow(currentIndex)
-            default:
-                print("default")
-            }
+            playOrder()
         }
     }
     
+    func playOrder() {
+        switch(btnOrder.order) {
+        case 1:
+            //顺序播放
+            currentIndex++
+            if currentIndex > self.songListData.count-1 {
+                currentIndex  = 0
+            }
+            onSelectRow(currentIndex)
+        case 2:
+            //随机播放
+            currentIndex = random() % songListData.count
+            onSelectRow(currentIndex)
+        case 3:
+            //单曲循环
+            onSelectRow(currentIndex)
+        default:
+            print("default")
+        }
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
