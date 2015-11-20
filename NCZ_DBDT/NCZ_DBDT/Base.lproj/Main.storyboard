@@ -62,7 +62,7 @@
                                 <rect key="frame" x="-4" y="248" width="330" height="40"/>
                                 <animations/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOx-gj-9vi">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oOx-gj-9vi" customClass="OrderButton" customModule="NCZ_DBDT" customModuleProvider="target">
                                 <rect key="frame" x="9" y="256" width="25" height="25"/>
                                 <animations/>
                                 <constraints>
@@ -170,7 +170,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q5E-wN-MaJ">
@@ -178,7 +178,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -337,6 +337,10 @@
                     <connections>
                         <outlet property="bgImage" destination="FGZ-4S-3ie" id="vb7-qO-XLi"/>
                         <outlet property="bgRotationImage" destination="8zu-3Z-GW3" id="qHd-rp-Vp6"/>
+                        <outlet property="btnBack" destination="9c3-u1-vQb" id="6Ji-dY-E8Z"/>
+                        <outlet property="btnNext" destination="jFV-AC-Qgs" id="ZoD-Ht-scJ"/>
+                        <outlet property="btnOrder" destination="oOx-gj-9vi" id="Yum-5a-rdw"/>
+                        <outlet property="btnPlay" destination="a83-iU-Oc2" id="cVM-BK-lzd"/>
                         <outlet property="playTime" destination="Odr-1F-Gnd" id="eS2-ie-NSm"/>
                         <outlet property="progressLine" destination="Mgj-E8-8KQ" id="0q6-3t-Ymy"/>
                         <outlet property="songList" destination="Rfe-iN-1rX" id="IlG-En-B3b"/>
@@ -362,7 +366,7 @@
                                 <rect key="frame" x="-4" y="28" width="328" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hiJ-Hm-aif">

@@ -39,6 +39,18 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     @IBOutlet var playTime: UILabel!
     @IBOutlet var progressLine: UIImageView!
     
+    //按钮
+    //播放按钮
+    @IBOutlet var btnPlay: NCZButton!
+    //下一首按钮
+    @IBOutlet var btnNext: UIButton!
+    //前一首按钮
+    @IBOutlet var btnBack: UIButton!
+    //当前播放
+    var currentIndex:Int = 0
+    
+    @IBOutlet var btnOrder: OrderButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bgRotationImage.onRotation()
@@ -66,10 +78,18 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         songList.dataSource = self
         songList.delegate   = self
         songList.backgroundColor = UIColor.clearColor()
+        
+        //添加按钮动作
+        btnPlay.addTarget(self, action: "onPlay:", forControlEvents: UIControlEvents.TouchUpInside)
+        btnNext.addTarget(self, action: "onNext:", forControlEvents: UIControlEvents.TouchUpInside)
+        btnBack.addTarget(self, action: "onBack:", forControlEvents: UIControlEvents.TouchUpInside)
+        btnOrder.addTarget(self, action: "onOrder:", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "playFinish", name: MPMoviePlayerPlaybackDidFinishNotification, object: audioPlayer)
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    
     //tableView代理所需要实现的两个方法
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return songListData.count
@@ -109,6 +129,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         if let channels = json["channels"].array {
             self.channelListData = channels
         }else if let song = json["song"].array {
+            isAutoFinish = false
             self.songListData = song
             print(song)
 
@@ -137,10 +158,16 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 //        http://douban.fm/j/mine/playlist?type=n&channel= 频道id &from=mainsite
         let url:String = "http://douban.fm/j/mine/playlist?type=n&channel=\(channelID)&from=mainsite"
         zHTTP.onSearch(url)
+        
+        //频道改变，当前的数目也要初始化
+        isAutoFinish = false
+        currentIndex = 0
     }
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        isAutoFinish = false
         onSelectRow(indexPath.row)
+        currentIndex = indexPath.row
     }
     
     //选中哪一行
@@ -194,12 +221,17 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.audioPlayer.contentURL = NSURL(string: url)
         self.audioPlayer.play()
         
+        //播放音乐，按钮一直停留在播放状态
+        btnPlay.onPlay()
+        
         //先停下计时器
         timer?.invalidate()
         //计时器归零
         playTime.text = "00:00"
         //启动计时器
         timer = NSTimer.scheduledTimerWithTimeInterval(0.4, target: self, selector: "onUpdate", userInfo: nil, repeats: true)
+        
+        isAutoFinish = false
         
     }
     
@@ -230,11 +262,79 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             let totalTime:Double = audioPlayer.duration
             //百分比
             let pro:CGFloat = CGFloat(t/totalTime)
-            
             progressLine.frame.size.width = view.frame.size.width*pro
-            
         }
     }
+    
+    func onPlay(btn:NCZButton) {
+        if btn.isPlay {
+            audioPlayer.play()
+        }else {
+            audioPlayer.pause()
+        }
+    }
+    
+    func onBack(btn:UIButton) {
+        isAutoFinish = false
+        currentIndex--
+        if currentIndex < 0 {
+            currentIndex = self.songListData.count - 1
+        }
+        onSelectRow(currentIndex)
+    }
+    
+    func onNext(btn:UIButton) {
+        isAutoFinish = false
+        currentIndex++
+        if currentIndex > self.songListData.count-1 {
+            currentIndex  = 0
+        }
+        onSelectRow(currentIndex)
+    }
+    
+    func onOrder(btn:OrderButton) {
+        var message:String = ""
+        switch(btn.order) {
+        case 1:
+            message = "顺序播放"
+        case 2:
+            message = "随机播放"
+        case 3:
+            message = "单曲循环"
+        default:
+            message = "E R R O R"
+        }
+        self.view.makeToast(message: message, duration: 0.5, position: "center")
+    }
+    
+    //是否为自动结束。因为认为结束，切换频道啊，点击下一首/上一首啊，都会执行playFinish
+    //只有自然结束才会执行playFinish为true，其他会触发这个方法的地方，都修改此参数
+    var isAutoFinish:Bool = true
+
+    //歌曲播放结束执行方法
+    func playFinish() {
+        if isAutoFinish {
+            switch(btnOrder.order) {
+            case 1:
+                //顺序播放
+                currentIndex++
+                if currentIndex > self.songListData.count-1 {
+                    currentIndex  = 0
+                }
+                onSelectRow(currentIndex)
+            case 2:
+                //随机播放
+                currentIndex = random() % songListData.count
+                onSelectRow(currentIndex)
+            case 3:
+                //单曲循环
+                onSelectRow(currentIndex)
+            default:
+                print("default")
+            }
+        }
+    }
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
